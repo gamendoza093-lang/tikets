@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soporte UNO | Sistema de Tickets</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <!-- ==================== ENCABEZADO ==================== -->
+    <header>
+        <div class="logo">
+            <h1><span class="verde">SOPORTE</span> UNO</h1>
+            <p>Sistema de Soporte Técnico</p>
+        </div>
+        <div class="acciones-header">
+            <!-- Botones para guardar y cargar datos en archivo .txt -->
+            <button onclick="exportarTXT()">Exportar .TXT</button>
+            <button onclick="importarTXT()">Importar .TXT</button>
+            <span id="fecha-hoy"></span>
+        </div>
+    </header>
+
+    <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+    <div class="pagina">
+
+        <!-- ---- MENÚ LATERAL ---- -->
+        <aside class="menu-lateral">
+            <ul>
+                <li id="btn-nuevo"    onclick="mostrarSeccion('nuevo')"    class="activo">📋 Nuevo Ticket</li>
+                <li id="btn-lista"    onclick="mostrarSeccion('lista')">   📄 Lista de Tickets</li>
+                <li id="btn-reportes" onclick="mostrarSeccion('reportes')">📊 Reportes</li>
+            </ul>
+
+            <!-- Contador de estadísticas rápidas -->
+            <div class="estadisticas">
+                <div class="caja-stat">
+                    <span id="total-tickets" class="numero">0</span>
+                    <span class="etiqueta">Total</span>
+                </div>
+                <div class="caja-stat">
+                    <span id="pendientes" class="numero verde">0</span>
+                    <span class="etiqueta">Pendientes</span>
+                </div>
+                <div class="caja-stat">
+                    <span id="en-proceso" class="numero amarillo">0</span>
+                    <span class="etiqueta">En Proceso</span>
+                </div>
+                <div class="caja-stat">
+                    <span id="completados" class="numero">0</span>
+                    <span class="etiqueta">Completados</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- ---- ÁREA DE CONTENIDO ---- -->
+        <main class="contenido">
+
+            <!-- === SECCIÓN 1: NUEVO TICKET === -->
+            <div id="seccion-nuevo" class="seccion">
+                <h2>Crear Nuevo Ticket</h2>
+
+                <!-- Formulario para ingresar datos del ticket -->
+                <form id="formulario-ticket" onsubmit="crearTicket(event)">
+
+                    <div class="grilla-formulario">
+                        <div class="campo">
+                            <label>Nombre del Cliente</label>
+                            <input type="text" id="cliente" placeholder="Ej: Juan Pérez" required>
+                        </div>
+
+                        <div class="campo">
+                            <label>Teléfono</label>
+                            <input type="tel" id="telefono" placeholder="Ej: 591 70000000" required>
+                        </div>
+
+                        <!-- Tipo de máquina: Laptop o Escritorio -->
+                        <div class="campo">
+                            <label>Tipo de Máquina</label>
+                            <select id="tipo-maquina" required onchange="actualizarMarcas()">
+                                <option value="">-- Selecciona tipo --</option>
+                                <option value="Laptop">💻 Laptop</option>
+                                <option value="Escritorio">🖥️ Escritorio</option>
+                            </select>
+                        </div>
+
+                        <!-- Marca del dispositivo (se llena según el tipo) -->
+                        <div class="campo">
+                            <label>Marca / Modelo</label>
+                            <select id="marca-dispositivo" required>
+                                <option value="">-- Primero elige tipo --</option>
+                            </select>
+                        </div>
+
+                        <!-- Campo para descripción específica del equipo -->
+                        <div class="campo">
+                            <label>Descripción del Equipo</label>
+                            <input type="text" id="dispositivo" placeholder="Ej: Dell XPS 15 / Intel Core i7" required>
+                        </div>
+
+                        <!-- Técnico que atenderá el ticket -->
+                        <div class="campo">
+                            <label>Técnico Asignado</label>
+                            <select id="tecnico" required>
+                                <option value="">-- Seleccionar técnico --</option>
+                                <option value="Gabriel Mendoza">Gabriel Mendoza</option>
+                                <option value="Abigail Rojas">Abigail Rojas</option>
+                                <option value="Benjamin Rojas">Benjamin Rojas</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Descripción del problema (ocupa todo el ancho) -->
+                    <div class="campo">
+                        <label>Descripción del Problema</label>
+                        <textarea id="descripcion" rows="5"
+                            placeholder="Describe el problema: El equipo no enciende, hace ruido raro..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-verde">✅ Crear Ticket</button>
+                </form>
+            </div>
+
+            <!-- === SECCIÓN 2: LISTA DE TICKETS === -->
+            <div id="seccion-lista" class="seccion oculto">
+                <h2>Lista de Tickets</h2>
+
+                <!-- Barra de búsqueda y filtro -->
+                <div class="barra-busqueda">
+                    <input type="text" id="buscar" placeholder="Buscar por cliente o dispositivo..."
+                        onkeyup="filtrarTickets()">
+                    <select id="filtro-estado" onchange="filtrarTickets()">
+                        <option value="">Todos los estados</option>
+                        <option value="Pendiente">Pendiente</option>
+                        <option value="En Proceso">En Proceso</option>
+                        <option value="Completado">Completado</option>
+                    </select>
+                </div>
+
+                <!-- Tabla donde se muestran los tickets -->
+                <table id="tabla-tickets">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Fecha</th>
+                            <th>Cliente</th>
+                            <th>Tipo</th>
+                            <th>Dispositivo</th>
+                            <th>Técnico</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpo-tabla">
+                        <!-- JavaScript inserta las filas aquí -->
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- === SECCIÓN 3: REPORTES === -->
+            <div id="seccion-reportes" class="seccion oculto">
+                <h2>Reportes del Sistema</h2>
+
+                <div class="grilla-reportes">
+                    <!-- Tabla generada desde la matriz de estadísticas -->
+                    <div class="tarjeta-reporte">
+                        <h3>📊 Tickets por Técnico</h3>
+                        <div id="reporte-tecnicos"></div>
+                    </div>
+
+                    <!-- Resumen general de estados -->
+                    <div class="tarjeta-reporte">
+                        <h3>📋 Resumen General</h3>
+                        <div id="reporte-estados"></div>
+                    </div>
+
+                    <!-- Reporte por tipo de máquina -->
+                    <div class="tarjeta-reporte">
+                        <h3>💻 Tickets por Tipo de Máquina</h3>
+                        <div id="reporte-tipos"></div>
+                    </div>
+                    
+                </div>
+                <div id="seccion-reportes" class="seccion oculto">
+               </div>
+
+            <div class="tarjeta-reporte" style="margin-top: 30px; border: 1px solid #333; padding: 20px; border-radius: 8px;">
+                <h3 style="color: #00cc00; margin-bottom: 15px;">🔧 Configuración de Personal (Técnicos)</h3>
+                <p style="font-size: 0.85rem; color: #888; margin-bottom: 15px;">Añade o remueve personal del taller. Los cambios se guardarán directamente en el archivo del sistema.</p>
+                
+                <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                    <input type="text" id="nuevo-tecnico-nombre" placeholder="Nombre del nuevo técnico..." style="flex: 1; padding: 10px; background: #1a1a1a; border: 1px solid #333; color: #fff; font-family: monospace;">
+                    <button onclick="agregarNuevoTecnico()" class="btn-verde" style="padding: 10px 20px;">➕ Añadir Técnico</button>
+                </div>
+
+                <h4 style="margin-bottom: 10px; font-size: 0.9rem;">Personal Activo Actualmente:</h4>
+                <ul id="lista-tecnicos-gestion" style="list-style: none; padding: 0; background: #141414; border-radius: 4px;">
+                    </ul>
+            </div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- ==================== VENTANA MODAL (detalle de ticket) ==================== -->
+    <div id="modal" class="modal oculto">
+        <div class="caja-modal">
+            <span class="cerrar-modal" onclick="cerrarModal()">✖</span>
+            <h3>Detalle del Ticket: <span id="modal-id"></span></h3>
+
+            <!-- Aquí JavaScript inserta los detalles del ticket -->
+            <div id="modal-detalle"></div>
+
+            <!-- Control para cambiar el estado del ticket -->
+            <div class="acciones-modal">
+                <label>Cambiar Estado:</label>
+                <select id="modal-estado">
+                    <option value="Pendiente">Pendiente</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Completado">Completado</option>
+                </select>
+                <button onclick="guardarCambioEstado()" class="btn-verde">💾 Guardar Cambio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Carga el archivo JavaScript al final -->
+    <script src="script.js"></script>
+</body>
+
+</html>

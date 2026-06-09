@@ -1,0 +1,525 @@
+/* ============================================================
+   styles.css - Soporte UNO
+   Paleta de colores: Negro, Verde (#00cc00), Blanco
+   ============================================================ */
+
+/* ── Resetear márgenes y tamaños ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ── Estilo del cuerpo de la página ── */
+body {
+    font-family: 'Courier New', Courier, monospace;
+    background-color: #0d0d0d;
+    color: #e0e0e0;
+    min-height: 100vh;
+}
+
+/* ══════════════════════════════════════
+   ENCABEZADO
+══════════════════════════════════════ */
+header {
+    background-color: #111111;
+    border-bottom: 3px solid #00cc00;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Nombre del sistema */
+.logo h1 {
+    font-size: 2rem;
+    letter-spacing: 3px;
+    color: #ffffff;
+}
+
+/* Color verde para "SOPORTE" */
+.verde {
+    color: #00cc00;
+}
+
+.logo p {
+    color: #888888;
+    font-size: 0.85rem;
+    margin-top: 3px;
+}
+
+/* Botones y fecha en el encabezado */
+.acciones-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.acciones-header button {
+    background-color: #1a1a1a;
+    color: #00cc00;
+    border: 1px solid #00cc00;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.acciones-header button:hover {
+    background-color: #00cc00;
+    color: #000000;
+}
+
+#fecha-hoy {
+    color: #888888;
+    font-size: 0.85rem;
+}
+
+/* ══════════════════════════════════════
+   ESTRUCTURA DE PÁGINA (sidebar + contenido)
+══════════════════════════════════════ */
+.pagina {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+/* ══════════════════════════════════════
+   MENÚ LATERAL
+══════════════════════════════════════ */
+.menu-lateral {
+    width: 240px;
+    background-color: #111111;
+    border-radius: 8px;
+    padding: 20px;
+    height: fit-content;
+    position: sticky;
+    top: 20px;
+}
+
+.menu-lateral ul {
+    list-style: none;
+}
+
+/* Cada ítem del menú */
+.menu-lateral li {
+    padding: 13px 16px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    border: 1px solid transparent;
+    transition: all 0.2s;
+}
+
+.menu-lateral li:hover {
+    border-color: #00cc00;
+    color: #00cc00;
+}
+
+/* Ítem activo (sección actual) */
+.menu-lateral li.activo {
+    background-color: #00cc00;
+    color: #000000;
+    font-weight: bold;
+}
+
+/* ── Cajitas de estadísticas rápidas ── */
+.estadisticas {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.caja-stat {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 7px;
+    padding: 12px;
+    text-align: center;
+}
+
+.numero {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.numero.verde {
+    color: #00cc00;
+}
+
+.numero.amarillo {
+    color: #ffcc00;
+}
+
+.etiqueta {
+    font-size: 0.8rem;
+    color: #888888;
+}
+
+/* ══════════════════════════════════════
+   ÁREA DE CONTENIDO PRINCIPAL
+══════════════════════════════════════ */
+.contenido {
+    flex: 1;
+    background-color: #111111;
+    border-radius: 8px;
+    padding: 25px;
+    min-height: 600px;
+}
+
+.contenido h2 {
+    color: #00cc00;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 10px;
+}
+
+/* Clase para ocultar elementos */
+.oculto {
+    display: none !important;
+}
+
+/* ══════════════════════════════════════
+   FORMULARIO DE NUEVO TICKET
+══════════════════════════════════════ */
+.grilla-formulario {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+/* Cada grupo de etiqueta + campo */
+.campo {
+    margin-bottom: 16px;
+}
+
+.campo label {
+    display: block;
+    color: #00cc00;
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+/* Campos de texto, select y textarea */
+.campo input,
+.campo select,
+.campo textarea {
+    width: 100%;
+    padding: 11px;
+    background-color: #1e1e1e;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.campo input:focus,
+.campo select:focus,
+.campo textarea:focus {
+    outline: none;
+    border-color: #00cc00;
+}
+
+.campo textarea {
+    resize: vertical;
+}
+
+/* Select: color de las opciones */
+.campo select option {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+/* ── Botón principal (verde) ── */
+.btn-verde {
+    background-color: #00cc00;
+    color: #000000;
+    padding: 13px 30px;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    margin-top: 5px;
+}
+
+.btn-verde:hover {
+    background-color: #00ff00;
+    transform: translateY(-2px);
+}
+
+/* ── Botón pequeño para la tabla ── */
+.btn-pequeno {
+    background-color: #1a1a1a;
+    color: #00cc00;
+    border: 1px solid #00cc00;
+    padding: 6px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 0.85rem;
+    transition: background-color 0.2s;
+}
+
+.btn-pequeno:hover {
+    background-color: #00cc00;
+    color: #000000;
+}
+
+/* ══════════════════════════════════════
+   BARRA DE BÚSQUEDA Y FILTROS
+══════════════════════════════════════ */
+.barra-busqueda {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.barra-busqueda input,
+.barra-busqueda select {
+    padding: 10px;
+    background-color: #1e1e1e;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    flex: 1;
+    min-width: 180px;
+}
+
+.barra-busqueda input:focus,
+.barra-busqueda select:focus {
+    outline: none;
+    border-color: #00cc00;
+}
+
+/* ══════════════════════════════════════
+   TABLA DE TICKETS
+══════════════════════════════════════ */
+#tabla-tickets {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #1a1a1a;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#tabla-tickets th {
+    background-color: #00aa00;
+    color: #000000;
+    padding: 13px 14px;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+#tabla-tickets td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #2a2a2a;
+    font-size: 0.9rem;
+}
+
+#tabla-tickets tr:hover td {
+    background-color: #222222;
+}
+
+/* Colores de estado en la tabla */
+.estado-pendiente {
+    color: #ffaa00;
+    font-weight: bold;
+}
+
+.estado-proceso {
+    color: #00ccff;
+    font-weight: bold;
+}
+
+.estado-completado {
+    color: #00cc00;
+    font-weight: bold;
+}
+
+/* ══════════════════════════════════════
+   SECCIÓN DE REPORTES
+══════════════════════════════════════ */
+.grilla-reportes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.tarjeta-reporte {
+    background-color: #1a1a1a;
+    border: 1px solid #333333;
+    border-radius: 8px;
+    padding: 20px;
+}
+
+.tarjeta-reporte h3 {
+    color: #00cc00;
+    font-size: 1rem;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #333333;
+    padding-bottom: 8px;
+}
+
+/* Tabla interna de reportes */
+.tabla-reporte {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+.tabla-reporte th {
+    background-color: #333333;
+    color: #00cc00;
+    padding: 9px 12px;
+    text-align: left;
+}
+
+.tabla-reporte td {
+    padding: 9px 12px;
+    border-bottom: 1px solid #2a2a2a;
+    color: #dddddd;
+}
+
+.tabla-reporte tr:hover td {
+    background-color: #222222;
+}
+
+/* Centrar números en reportes */
+.centro {
+    text-align: center;
+}
+
+/* ══════════════════════════════════════
+   VENTANA MODAL (detalle de ticket)
+══════════════════════════════════════ */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+}
+
+.caja-modal {
+    background-color: #111111;
+    border: 2px solid #00cc00;
+    border-radius: 10px;
+    padding: 28px;
+    width: 90%;
+    max-width: 720px;
+    position: relative;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.caja-modal h3 {
+    color: #00cc00;
+    margin-bottom: 18px;
+    font-size: 1.1rem;
+}
+
+.caja-modal p {
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.caja-modal hr {
+    border-color: #333333;
+    margin: 14px 0;
+}
+
+/* Botón de cerrar modal */
+.cerrar-modal {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+    font-size: 1.4rem;
+    cursor: pointer;
+    color: #888888;
+    transition: color 0.2s;
+}
+
+.cerrar-modal:hover {
+    color: #ff4444;
+}
+
+/* Sección de acciones dentro del modal */
+.acciones-modal {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.acciones-modal label {
+    color: #00cc00;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.acciones-modal select {
+    padding: 9px 12px;
+    background-color: #1e1e1e;
+    border: 1px solid #444444;
+    border-radius: 6px;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.9rem;
+}
+
+/* ══════════════════════════════════════
+   DISEÑO RESPONSIVO para pantallas pequeñas
+══════════════════════════════════════ */
+@media (max-width: 768px) {
+    .pagina {
+        flex-direction: column;
+        padding: 12px;
+    }
+
+    .menu-lateral {
+        width: 100%;
+        position: static;
+    }
+
+    .grilla-formulario {
+        grid-template-columns: 1fr;
+    }
+
+    .grilla-reportes {
+        grid-template-columns: 1fr;
+    }
+
+    .acciones-header {
+        gap: 8px;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+}

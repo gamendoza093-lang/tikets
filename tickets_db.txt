@@ -1,0 +1,5 @@
+ID|Fecha|Cliente|Telefono|Tipo|Marca|Dispositivo|Tecnico|Descripcion|Estado
+T57179|1/6/2026|juan|32748|Laptop|Lenovo IdeaPad|ryzem 5|Benjamin Rojas|fallas en el disco|Pendiente
+T12433|1/6/2026|alexa|78044252|Escritorio|HP Compaq|intel5|Abigail Rojas|no lee la ram|Completado
+T43547|2/6/2026|marta|293484|Laptop|Lenovo IdeaPad|intel5|Benjamin Rojas|fallas en el teclado|En Proceso
+T21276|2/6/2026|alejandra|595839|Escritorio|Apple iMac|no detectado|Gabriel Mendoza|matenimiento preventivo|En Proceso
